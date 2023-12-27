@@ -1,0 +1,11 @@
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\bin\Debug\net6.0\NLayerProject.Core.deps.json
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\bin\Debug\net6.0\NLayerProject.Core.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\bin\Debug\net6.0\NLayerProject.Core.pdb
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.AssemblyInfoInputs.cache
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.AssemblyInfo.cs
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.csproj.CoreCompileInputs.cache
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\refint\NLayerProject.Core.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.pdb
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\ref\NLayerProject.Core.dll
