@@ -32,32 +32,44 @@ namespace NLayerProject.Repository.Repositories
 
         public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            //AsNoTracking() metodu, çekilen verilerin Entity Framework tarafından bellekte takip edilmemesini
+            //ve değişikliklerin izlenmemesini sağlar. Bu özellik, performans açısından avantajlıdır, özellikle
+            //büyük veri setleri ile çalışırken. Çünkü, AsNoTracking() kullanıldığında, çekilen veriler sadece
+            //okunur ve bellekte bir önbelleğe alınmazlar. Bu durum, verilerin anlık durumlarını takip etmeye
+            //gerek olmadığında performans kazancı sağlar.
+
+
+
+            return _dbSet.AsNoTracking().Where(expression).AsQueryable();
+
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbSet.FindAsync(id);
+                
         }
 
         public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            // _context.Entry(entity).State = EntityState.Deleted;
+            _dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            _dbSet.RemoveRange(entities);
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            // _context.Entry(entity).State = EntityState.Modified;
+            _dbSet.Update(entity);
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _dbSet.Where(expression);
         }
     }
 }
