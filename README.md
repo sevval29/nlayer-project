@@ -14,6 +14,7 @@ Proje, aşağıdaki dört katmandan oluşmaktadır:
 -Entity Framework
 -Fluent Validation
 -UnitOfWork
+-Microsoft SQL Server
 # Entity'ler
 
 1. **Team**
