@@ -12,7 +12,7 @@ namespace NLayerProject.Core.Repositories
     {
         Task<T> GetByIdAsync(int id);
 
-        IQueryable<T> GetAll(Expression<Func<T,bool>> expression);
+        IQueryable<T> GetAll();
         //T entity Bool da dönüş 
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
 

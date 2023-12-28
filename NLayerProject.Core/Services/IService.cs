@@ -10,11 +10,11 @@ namespace NLayerProject.Core.Services
     public interface IService<T> where T : class
 
     {
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetById(int id);
         Task<IEnumerable<T>> GetAllAsync();
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
-        Task AddAsync(T entity);
-        Task AddRangeAsync(IEnumerable<T> entities);
+        Task <T> AddAsync(T entity);
+        Task <IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
 
         //Repository’de void olarak belirtilen Update ve Remove işlemleri; Servis Katmanı’nda kullanılıp veri
         //tabanına yansıtma işlemi gerçekleşeceği için IService içerisinde Task döndürmeli ve asenkron şekilde yazılmalıdır.

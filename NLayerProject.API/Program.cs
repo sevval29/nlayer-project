@@ -1,9 +1,15 @@
+using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using NLayerProject.Core.Repositories;
+using NLayerProject.Core.Services;
 using NLayerProject.Core.UnitOfWorks;
 using NLayerProject.Repository;
 using NLayerProject.Repository.Repositories;
 using NLayerProject.Repository.UnitOfWorks;
+using NLayerProject.Service;
+using NLayerProject.Service.Mapping;
+using NLayerProject.Service.Validations;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +22,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+
+builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddControllers()
+    .AddFluentValidation(x =>
+    {
+        x.RegisterValidatorsFromAssemblyContaining<TeamDtoValidator>();
+        x.RegisterValidatorsFromAssemblyContaining<UserDtoValidator>();
+        x.RegisterValidatorsFromAssemblyContaining<UserProfileValidator>();
+    });
 
 
 //AppDbContext iþlemleri

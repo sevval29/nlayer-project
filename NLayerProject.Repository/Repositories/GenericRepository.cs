@@ -30,7 +30,7 @@ namespace NLayerProject.Repository.Repositories
            await _dbSet.AddRangeAsync(entities);
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
+        public IQueryable<T> GetAll()
         {
             //AsNoTracking() metodu, çekilen verilerin Entity Framework tarafından bellekte takip edilmemesini
             //ve değişikliklerin izlenmemesini sağlar. Bu özellik, performans açısından avantajlıdır, özellikle
@@ -40,7 +40,7 @@ namespace NLayerProject.Repository.Repositories
 
 
 
-            return _dbSet.AsNoTracking().Where(expression).AsQueryable();
+            return _dbSet.AsNoTracking().AsQueryable();
 
         }
 
