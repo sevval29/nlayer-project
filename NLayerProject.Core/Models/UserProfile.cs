@@ -18,6 +18,6 @@ namespace NLayerProject.Core.Models
         // Bire-bir ilişki
         public User User { get; set; }
 
-        public Team Team { get; set; }
+        
     }
 }

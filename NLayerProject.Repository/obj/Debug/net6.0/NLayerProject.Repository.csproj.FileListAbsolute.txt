@@ -13,3 +13,6 @@ C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Repository\obj\Debug\net
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Repository\obj\Debug\net6.0\refint\NLayerProject.Repository.dll
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Repository\obj\Debug\net6.0\NLayerProject.Repository.pdb
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Repository\obj\Debug\net6.0\ref\NLayerProject.Repository.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Repository\bin\Debug\net6.0\NLayerProject.Repository.runtimeconfig.json
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Repository\obj\Debug\net6.0\NLayerProject.Repository.sourcelink.json
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Repository\obj\Debug\net6.0\NLayerProject.Repository.genruntimeconfig.cache

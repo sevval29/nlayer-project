@@ -9,3 +9,4 @@ C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NL
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\refint\NLayerProject.Core.dll
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.pdb
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\ref\NLayerProject.Core.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.Core\obj\Debug\net6.0\NLayerProject.Core.sourcelink.json
