@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLayerProject.Core.Repositories
+namespace NLayerProject.Core.Services
 {
-    public interface IUserProfile:IGenericRepository<UserProfile>
+    public interface IUserProfileService : IService<UserProfile>
     {
+
     }
 }
