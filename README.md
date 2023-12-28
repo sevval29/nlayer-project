@@ -10,10 +10,10 @@ Proje, aşağıdaki dört katmandan oluşmaktadır:
 4. **Service:** Service katmanında mapping service implementation ve validations uygulanır.
 # Kullanılan Teknolojiler
 
-.NET Core
-Entity Framework Core
-Fluent Validation
-UnitOfWork
+-.NET Core
+-Entity Framework
+-Fluent Validation
+-UnitOfWork
 # Entity'ler
 
 1. **Team**
