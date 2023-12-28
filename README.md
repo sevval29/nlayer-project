@@ -1,6 +1,4 @@
 #NLayer Project
-# About Project
-A backend API will be developed for a flight search application.
 
 # Proje Yapısı
 
@@ -14,6 +12,7 @@ Proje, aşağıdaki dört katmandan oluşmaktadır:
 
 .NET Core
 Entity Framework Core
+Fluent Validation
 UnitOfWork
 # Entity'ler
 
