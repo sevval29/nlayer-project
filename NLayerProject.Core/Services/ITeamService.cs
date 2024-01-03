@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NLayerProject.Core.Services
 {
-    public interface ITeamService : IService<Team>
+    public interface ITeamService:IService<Team>
     {
     }
 }

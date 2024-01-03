@@ -52,5 +52,24 @@ namespace NLayerProject.API.Controllers
             return CreateActionResult(CustomResponseData<NoContentDto>.Success(204));
         }
 
+        [HttpPost("Signup")]
+        public async Task<IActionResult> SignUp(AuthRequestDto authDto)
+        {
+            var user = _userService.SignUp(authDto);
+            var userDto = _mapper.Map<UserDto>(user);
+            return CreateActionResult(CustomResponseData<UserDto>.Success(201, userDto));
+        }
+
+        [HttpPost("Login")]
+        public IActionResult Login(AuthRequestDto authDto)
+        {
+            var result = _userService.Login(authDto);
+            if (result.User != null)
+                return CreateActionResult(CustomResponseData<AuthResponseDto>.Success(200, result));
+            else
+                return CreateActionResult(CustomResponseData<AuthResponseDto>.Success(401, result));
+        }
     }
+
 }
+

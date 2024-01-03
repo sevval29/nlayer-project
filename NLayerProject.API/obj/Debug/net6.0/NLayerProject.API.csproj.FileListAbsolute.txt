@@ -75,3 +75,6 @@ C:\Users\sevva\source\repos\NLayerProject\NLayerProject.API\bin\Debug\net6.0\Aut
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.API\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.API\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
 C:\Users\sevva\source\repos\NLayerProject\NLayerProject.API\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.API\bin\Debug\net6.0\Autofac.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.API\bin\Debug\net6.0\Autofac.Extensions.DependencyInjection.dll
+C:\Users\sevva\source\repos\NLayerProject\NLayerProject.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll

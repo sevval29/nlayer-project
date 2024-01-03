@@ -12,23 +12,77 @@ namespace NLayerProject.Repository
 {
     public class AppDbContext :DbContext
     {
-        public DbSet<Team> Teams {  get; set; }
-
-        public DbSet<User> Users { get; set; }
-
-        public DbSet<UserProfile> UserProfiles { get; set; }
+        
 
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options) 
         {
 
         }
+        public DbSet<Team> Teams { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
         //Entity sınıfları içinde farklı özellikler bulundururuz. Eğer bu özelliklere özel bir düzenleme
         //yapmazsak, özellik alanları rastgele bir şekilde veri tabanına kaydedilebilir. Veri tabanında gereksiz yer
         //tutmamak için bu ayarlamaları Entity Framework (EF) Core üzerinde yapabiliriz.
         //Entitylerle ilgili ayarları yapmak için, migration işlemi sırasında override etmemiz gereken bir metodumuz vardır:
         //OnModelCreating (model oluştururken çalıştırılacak metod).
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity entityReference)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Modified:
+                            {
+                                entityReference.UpdatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Added:
+                            {
+                                entityReference.CreatedDate = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override int SaveChanges()
+        {
+            foreach (var item in ChangeTracker.Entries())
+            {
+                if (item.Entity is BaseEntity entityReference)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Modified:
+                            {
+                                entityReference.UpdatedDate = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Added:
+                            {
+                                entityReference.CreatedDate = DateTime.Now;
+                                entityReference.UpdatedDate = null;
+                                break;
+                            }
+                        case EntityState.Deleted:
+                            {
+                                entityReference.UpdatedDate = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+            }
+            return base.SaveChanges();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,7 +99,7 @@ namespace NLayerProject.Repository
             //tüm Fluent API konfigürasyon sınıflarını otomatik olarak tanımlar ve uygular.
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+            base.OnModelCreating(modelBuilder);
 
         }
 

@@ -1,17 +1,23 @@
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using NLayerProject.API.Abstraction;
+using NLayerProject.API.Concrete;
+using NLayerProject.API.MiddleWares;
+using NLayerProject.API.Modules;
 using NLayerProject.Core.Repositories;
 using NLayerProject.Core.Services;
 using NLayerProject.Core.UnitOfWorks;
 using NLayerProject.Repository;
 using NLayerProject.Repository.Repositories;
 using NLayerProject.Repository.UnitOfWorks;
-using NLayerProject.Service;
 using NLayerProject.Service.Mapping;
+using NLayerProject.Service.Services;
 using NLayerProject.Service.Validations;
 using System.Reflection;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,23 +25,50 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
+#region swagger iþlemleri
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Description = "Bearer Authentication with JWT Token",
+        Type = SecuritySchemeType.Http
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+});
+
+#endregion
+
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IJwtAuthenticationManager, JwtAuthenticationManager>();
 
-builder.Services.AddControllers()
-    .AddFluentValidation(x =>
-    {
-        x.RegisterValidatorsFromAssemblyContaining<TeamDtoValidator>();
-        x.RegisterValidatorsFromAssemblyContaining<UserDtoValidator>();
-        x.RegisterValidatorsFromAssemblyContaining<UserProfileValidator>();
-    });
+////JWT Kütüphanesinin Tanýtýlmasý
+
+builder.Services.AddControllers().AddFluentValidation(x => { x.RegisterValidatorsFromAssemblyContaining<TeamDtoValidator>(); });
 
 
-//AppDbContext i�lemleri
+//AppDbContext iþlemler
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
@@ -44,8 +77,14 @@ builder.Services.AddDbContext<AppDbContext>(x =>
     });
 });
 
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+//Buradan Autofac kullanarak yazdýðýmýz RepoServiceModule'ü dahil ediyoruz.
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoModuleService()));
+
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -55,9 +94,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCustomException();
 
+app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
 
 app.Run();
