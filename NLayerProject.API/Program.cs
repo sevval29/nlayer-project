@@ -63,12 +63,13 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IJwtAuthenticationManager, JwtAuthenticationManager>();
 
-////JWT Kütüphanesinin Tanýtýlmasý
+////JWT Kütüphanesinin Tanıtılması
 
+//biri için tanımlama yapınca diğerlerini algıladı
 builder.Services.AddControllers().AddFluentValidation(x => { x.RegisterValidatorsFromAssemblyContaining<TeamDtoValidator>(); });
 
 
-//AppDbContext iþlemler
+//AppDbContext islemler
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
@@ -79,7 +80,7 @@ builder.Services.AddDbContext<AppDbContext>(x =>
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
-//Buradan Autofac kullanarak yazdýðýmýz RepoServiceModule'ü dahil ediyoruz.
+//Buradan Autofac kullanarak yazdığımız RepoServiceModule'ü dahil ediyoruz.
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoModuleService()));
 
 

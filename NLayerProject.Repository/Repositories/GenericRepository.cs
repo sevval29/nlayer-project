@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace NLayerProject.Repository.Repositories
 {
     //Core katmanında oluşturduğum IGenericRepository arabirimini, Repository katmanında uygulayacağım.
+    //buradaki işlemler hala memoryde veritabanında bi rişlem gerçekleşmiyor. ne zaman gerçekleşecek? commitasync çağırdığımmızda.
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DbSet<T> _dbSet;

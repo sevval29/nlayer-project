@@ -53,7 +53,7 @@ namespace NLayerProject.Service.Services
 
             return Convert.ToBase64String(hashed);
         }
-
+        //private metodlara test yapmamıza gerek yok
         private byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
         {
             HashAlgorithm algorithm = new SHA256Managed();

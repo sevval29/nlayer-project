@@ -12,7 +12,7 @@ namespace NLayerProject.Repository
 {
     public class AppDbContext :DbContext
     {
-        
+        //biz burda tablolarımızı ekledikçe dbset olarak da burda tanımlamamız gerekiyor.
 
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options) 
         {
